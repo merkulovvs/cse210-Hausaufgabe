@@ -22,10 +22,36 @@ public class Scripture
     }
 
     public string GetDisplayText()
-    {
-
-        return $"{_reference.GetDisplayTextOneVerse()}";
+    {   
+       string scripture = "";
+       for(int i = 0; i < _words.Count; i++)
+       {
+           if(i != _words.Count)
+           {
+            scripture += _words[i].GetDisplayText() + " ";
+           }
+           else
+           {
+            scripture += _words[i].GetDisplayText();
+           }
+           
+       }
+        
+        return $"{_reference.GetDisplayTextOneVerse()} {scripture}";
     }
+    
+    //Checking contents of List _words.
+
+    //public void GetDisplayVerse()
+    //{
+    //    //string[] scripture = new string[_words.Count];
+    //    for (int i = 0; i < _words.Count; i++)
+    //    {   
+    //        //scripture[i] = _words[i].GetDisplayText();
+    //        Console.Write($"{_words[i].GetDisplayText()} ");
+    //    }
+    //    //Console.WriteLine(scripture);
+    //}
 
     public bool IsCompletelyHidden()
     {   
