@@ -11,10 +11,11 @@ public class Word
 
     public void Hide()
     {
-        for(int i = 0; i<_text.Length; i++)
+
+        foreach(char letter in _text)
         {
            
-           
+          _text = _text.Replace(letter, '_'); 
 
         }
         _isHidden = true;
