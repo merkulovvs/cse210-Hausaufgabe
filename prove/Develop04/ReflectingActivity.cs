@@ -2,6 +2,8 @@ public class ReflectingActivity : Activity
 {
     private List<string> _prompts = new List<string>();
     private List<string> _questions = new List<string>();
+    
+    //List for holding unused indexes for random questions that don't repeat
     private List<int> unusedIndexes = new List<int>();
     
 
@@ -17,7 +19,7 @@ public class ReflectingActivity : Activity
                               "What did you learn about yourself through this experience?", "How can you keep this experience in mind in the future?"};
         _questions.AddRange(questions);
 
-        for(int i=0; i < _prompts.Count; i++)
+        for(int i=0; i < _questions.Count; i++)
         {
             unusedIndexes.Add(i);
         }
@@ -26,14 +28,14 @@ public class ReflectingActivity : Activity
     public void Run(int duration)
     {
         _duration = duration;
-        DateTime startTime = DateTime.Now;
-        DateTime endTime = startTime.AddSeconds(duration);
-        Console.WriteLine();
+       
+       
+       
 
         Console.WriteLine("Consider the following prompt:");
-        Console.WriteLine();
-        Console.WriteLine($"---" + GetRandomPrompt() + "---");
-        Console.WriteLine();
+        
+        DisplayPrompt();
+        
         Console.Write("When you have something in mind, press enter to continue ");
         Console.ReadLine();
         Console.WriteLine();
@@ -42,12 +44,8 @@ public class ReflectingActivity : Activity
         ShowCountDown(5);
         Console.Clear();
 
-        while(DateTime.Now < endTime || unusedIndexes.Count == 0)
-        {
-            Console.Write($"> " + GetRandomQuestion() + " ");
-            ShowSpinner(5);
-            Console.WriteLine();
-        }
+        DisplayQuestions(duration);   
+        
 
         Console.WriteLine();
         DisplayEndingMessage();
@@ -56,27 +54,36 @@ public class ReflectingActivity : Activity
     public string GetRandomPrompt()
     {
         Random randomGenerator = new Random();
-        int unusedListIndex = randomGenerator.Next(unusedIndexes.Count);
-        int randomPromptNumber = unusedIndexes[unusedListIndex];
-        unusedIndexes.RemoveAt(unusedListIndex);
+        int randomPromptNumber = randomGenerator.Next(_prompts.Count);
         return _prompts[randomPromptNumber];
-        
     }
 
     public string GetRandomQuestion()
-    {
+    {   
         Random randomGenerator = new Random();
-        int randomQuestionNumber = randomGenerator.Next(_prompts.Count);
-        return _prompts[randomQuestionNumber];
+        int unusedListIndex = randomGenerator.Next(unusedIndexes.Count);
+        int randomQuestionNumber = unusedIndexes[unusedListIndex];
+        unusedIndexes.RemoveAt(unusedListIndex);
+        return _questions[randomQuestionNumber];
     }
 
     public void DisplayPrompt()
     {
-
+        Console.WriteLine();
+        Console.WriteLine($"---" + GetRandomPrompt() + "---");
+        Console.WriteLine();
     }
 
-    public void DisplayQuestions()
-    {
-
+    public void DisplayQuestions(int duration)
+    {   
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(duration);
+        Console.WriteLine();
+        while(unusedIndexes.Count > 0 && DateTime.Now < endTime)
+        {
+            Console.Write($"> " + GetRandomQuestion() + " ");
+            ShowSpinner(5);
+            Console.WriteLine();
+        }
     }
 }
