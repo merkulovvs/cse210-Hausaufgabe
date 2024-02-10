@@ -49,6 +49,7 @@ public class ReflectingActivity : Activity
 
         Console.WriteLine();
         DisplayEndingMessage();
+        
     }
 
     public string GetRandomPrompt()

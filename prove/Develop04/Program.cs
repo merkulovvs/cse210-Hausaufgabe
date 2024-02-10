@@ -62,6 +62,19 @@ class Program
 
             else if(userChoise == 3)
             {
+                Console.Clear();
+                ListingActivity activity3 = new ListingActivity("Listing", "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.");
+                activity3.DisplayStartingMessage();
+                Console.WriteLine();
+
+                Console.Write("How long, in seconds, would you like for your session? ");
+                string durationStr = Console.ReadLine();
+                Console.WriteLine();
+                int durationInt = Int32.Parse(durationStr);
+                Console.Clear();
+                Console.WriteLine("Get ready...");
+                activity3.ShowSpinner(8);
+                activity3.Run(durationInt);
 
             }
 
