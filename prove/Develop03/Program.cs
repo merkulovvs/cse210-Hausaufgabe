@@ -27,7 +27,7 @@ class Program
            else
            {
             Console.Clear();
-            scripture.HideRandomWords(3);
+            scripture.HideRandomWords(5);
             Console.WriteLine(scripture.GetDisplayText());
             Console.WriteLine("");            
            }

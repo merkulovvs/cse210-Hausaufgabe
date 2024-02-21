@@ -61,8 +61,7 @@ public class GoalManager
 
     public void ListGoalNames()
     {
-        Console.Clear();
-        Console.WriteLine("Goals names");
+        Console.WriteLine("The goals are:");
         Thread.Sleep(10000);
     }
 
@@ -73,7 +72,38 @@ public class GoalManager
 
     public void CreateGoal()
     {
+        int choice = 0;
+        Console.WriteLine("The types of goals are:");
+        Console.WriteLine("  1. Simple Goal");
+        Console.WriteLine("  2. Eternal Goal");
+        Console.WriteLine("  3. Checklist Goal");
+        Console.Write("Which type of of goal would you like to create? ");
+        string choiseStr = Console.ReadLine();
+        choice = Int32.Parse(choiseStr);
 
+        if(choice == 1)
+        {
+            Console.Write("What is the name of your goal? ");
+            string name = Console.ReadLine();
+            Console.Write("What is a short description of it? ");
+            string description = Console.ReadLine();
+            Console.Write("What is the amount of points assosiated with this goal? ");
+            string pointsStr = Console.ReadLine();
+            int points = Int32.Parse(pointsStr);
+
+            SimpleGoal goal1 = new SimpleGoal(name, description, points);
+            _goals.Add(goal1);
+        }
+
+        else if(choice == 2)
+        {
+
+        }
+
+        else if(choice == 3)
+        {
+            
+        }
     }
 
     public void RecordEvent()
