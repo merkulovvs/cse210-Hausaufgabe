@@ -30,6 +30,6 @@ public class Event
 
     public void StandardDetails()
     {
-
+        Console.WriteLine($"{_eventTitle}, {_description}, on {_date}, at {_time} at {_address}");
     }
 }

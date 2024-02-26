@@ -11,4 +11,5 @@ public class Lectures : Event
         _capacity = capacity;
     }
 
+
 }
