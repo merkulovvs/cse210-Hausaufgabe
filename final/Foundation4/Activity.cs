@@ -1,8 +1,8 @@
 public class Activity
 {
-    DateTime _date;
-    DateTime _time;
-    int _length;
+   private DateTime _date;
+    private DateTime _time;
+    private int _length;
 
     public virtual int GetDistance()
     {
